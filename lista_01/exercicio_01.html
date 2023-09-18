@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JavaScript</title>
+</head>
+<body>
+    <script>
+        var nome = prompt('qual é o seu nome?')
+        var altura = prompt('qual a sua altura (cm)? ')
+        var peso = prompt('qual o seu peso? ')
+
+        altura = parseFloat(altura)
+        peso = parseFloat(peso)
+        altura = altura / 100
+        massa = peso / (altura**2)
+        massa_arrumada = massa.toFixed(2)
+
+        document.write(`${nome} possui índice de massa corporal igual a ${massa_arrumada}, sendo classificado como: `)
+
+        if (16 > massa){
+            document.write('baixo peso muito grave')
+        }
+        else if (16 <= massa && massa <= 16.99){
+            document.write('baixo peso grave')
+        }
+        else if (17 <= massa && massa <= 18.49){
+            document.write('baixo peso')
+        }
+        else if (18.5 <= massa <= 24.99){
+            document.write('peso normal')
+        }
+        else if (25 <= massa && massa <= 29.99){
+            document.write('sobrepeso')
+        }
+        else if (30 <= massa && massa <= 34.99){
+            document.write('obesidade grau I')
+        }
+        else if (35 <= massa && massa <= 39.99){
+            document.write('obesidade grau II')
+        }
+        else {
+            document.write('obesidade grau III')
+        }
+    </script>
+</body>
+</html>
