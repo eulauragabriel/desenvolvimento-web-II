@@ -1,0 +1,41 @@
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="/style.css">
+  <title>Edite Sua Música</title>
+</head>
+
+<body>
+  <h1>Editar Música</h1>
+  <form action="/update/<%= musica.id_musica %>" method="post">
+    <label for="titulo_musica">Título da Música</label>
+    <input type="text" id="titulo_musica" name="titulo_musica" value="<%= musica.titulo_musica %>" required><br>
+
+    <label for="ano_lancamento_musica">Ano de Lançamento da Música</label>
+    <input type="number" id="ano_lancamento_musica" name="ano_lancamento_musica"
+      value="<%= musica.ano_lancamento %>"><br>
+
+    <label for="id_artista_musica">Artista</label>
+    <select id="id_artista_musica" name="id_artista_musica" required>
+      <% for (const artista of artistas) { %>
+        <option value="<%= artista.id_artista %>" <% if (artista.id_artista===musica.id_artista) { %>selected<% } %>><%=
+              artista.nome_artista %>
+        </option>
+        <% } %>
+    </select><br>
+
+    <label for="id_album_musica">Álbum</label>
+    <select id="id_album_musica" name="id_album_musica" required>
+      <% for (const album of albuns) { %>
+        <option value="<%= album.id_album %>" <% if (album.id_album===musica.id_album) { %>selected<% } %>><%=
+              album.titulo_album %>
+        </option>
+        <% } %>
+    </select><br>
+
+
+    <input type="submit" value="Salvar Edições">
+  </form>
+</body>
+
+</html>

@@ -1,0 +1,74 @@
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Criar Música, Artista e Álbum</title>
+</head>
+
+<body>
+    <h1>Criar Música, Artista e Álbum</h1>
+
+    <form action="/create/musica" method="post">
+        <h2>Criar Nova Música</h2>
+        <label for="titulo_musica">Título da Música</label>
+        <input type="text" id="titulo_musica" name="titulo_musica" required><br>
+
+        <label for="ano_lancamento_musica">Ano de Lançamento da Música</label>
+        <input type="number" id="ano_lancamento_musica" name="ano_lancamento_musica"><br>
+
+        <label for="id_artista_musica">Selecione um Artista:</label>
+        <select name="id_artista_musica">
+            <option value="">Selecione um artista existente</option>
+            <% musicas.artistas.forEach(function (artista) { %>
+                <option value="<%= artista.id_artista %>">
+                    <%= artista.nome_artista %>
+                </option>
+                <% }); %>
+        </select>
+        <br>
+        <label for="id_album_musica">Selecione um Álbum:</label>
+        <select name="id_album_musica">
+            <option value="">Selecione um álbum existente</option>
+            <% musicas.albuns.forEach(function (album) { %>
+                <option value="<%= album.id_album %>">
+                    <%= album.titulo_album %>
+                </option>
+                <% }); %>
+        </select>
+        <br>
+        <input type="submit" value="Criar Música">
+    </form>
+
+    <form action="/create/album" method="post">
+        <h2>Criar Novo Álbum</h2>
+        <label for="titulo_album">Título do Álbum</label>
+        <input type="text" id="titulo_album" name="titulo_album"><br>
+
+        <label for="ano_lancamento_album">Ano de Lançamento do Álbum</label>
+        <input type="number" id="ano_lancamento_album" name="ano_lancamento_album"><br>
+
+        <label for="id_artista_album">Selecione um Artista:</label>
+        <select name="id_artista_album">
+            <option value="">Selecione um artista existente</option>
+            <% musicas.artistas.forEach(function (artista) { %>
+                <option value="<%= artista.id_artista %>">
+                    <%= artista.nome_artista %>
+                </option>
+                <% }); %>
+        </select>
+        <br>
+        <input type="submit" value="Criar Álbum">
+    </form>
+
+    <form action="/create/artista" method="post">
+        <h2>Criar Novo Artista</h2>
+        <label for="nome_artista">Nome do Artista</label>
+        <input type="text" id="nome_artista" name="nome_artista">
+        <br>
+        <input type="submit" value="Criar Artista">
+    </form>
+    <br>
+    <a href="/">Voltar para a Lista de Músicas</a>
+</body>
+
+</html>

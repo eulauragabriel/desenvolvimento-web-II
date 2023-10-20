@@ -1,0 +1,30 @@
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Lista de Músicas</title>
+</head>
+
+<body>
+    <h1>Lista de Músicas</h1>
+    <ul>
+        <% musicas.forEach(musica=> { %>
+            <li>
+                <span>
+                    <%= musica.titulo_musica %> -
+                        <%= musica.id_album %> -
+                            <%= musica.ano_lancamento %> -
+                                <%= musica.id_artista %>
+                </span>
+                <div class="action-buttons">
+                    <a class="edit-button" href="/edit/<%= musica.id_musica %>">Editar</a>
+                    <a class="delete-button" href="/delete/<%= musica.id_musica %>">Deletar</a>
+                </div>
+            </li>
+            <% }); %>
+    </ul>
+
+    <a href="/create">Criar nova música</a>
+</body>
+
+</html>

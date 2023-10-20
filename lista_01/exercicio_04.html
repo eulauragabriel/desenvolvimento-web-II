@@ -1,68 +1,51 @@
 <html>
 
 <head>
-    <title>JavaScript</title>
+    <title>Calculadora de Frete</title>
 </head>
 
 <body>
     <script>
-        let taxa = 0
-        let distancia = prompt('informe a distância da entrega em km: ')
-        let rastreamento = prompt('deseja rastrear a sua entrega? (s, n) ')
-        let pecas = prompt('quantas peças irá transportar? ')
-        let regiao = prompt('qual a sua região? (sul, sudeste, centro-oeste) ')
-        let freteRegiao = 0
+        const distanciaKm = parseFloat(prompt("Informe a distância em quilômetros do frete:"))
+        const quantidadePecas = parseInt(prompt("Informe a quantidade de peças a serem transportadas:"))
+        const regiao = parseInt(prompt("Informe a região (1 - Sul, 2 - Sudeste, 3 - Centro-oeste):"))
+        const desejaRastreamento = prompt("Deseja rastreamento (S-Sim e N-Não)?").toUpperCase() === "S"
 
-        if (rastreamento == 's') {
-            taxa = 200
-            document.write(`valor taxa de rastreamento: R$${taxa}.00`)
-        } else if (rastreamento == 'n') {
-            taxa = 0
-            document.write(`valor taxa de rastreamento: R$${taxa}.00`)
-        }
-        if (pecas <= 1000) {
-            if (regiao == 'sul') {
-                freteRegiao = pecas
-                document.write(`valor do frete por peça: R$${freteRegiao.toFixed(2)}`)
-            }
-            else if (regiao == 'sudeste') {
-                freteRegiao = pecas * 1.2
-                document.write(`valor do frete por peça: R$${freteRegiao.toFixed(2)}`)
-            }
-            else if (regiao == 'centro-oeste') {
-                freteRegiao = pecas * 1.3
-                document.write(`valor do frete por peça: R$${freteRegiao.toFixed(2)}`)
-            }
-        }
-        else if (pecas > 1000) {
-            if (regiao == 'sul') {
-                let frete1 = 1000 * 1
-                let frete2 = pecas - 1000
-                let frete3 = frete2 * 100/10
-                freteRegiao = frete1 + frete3
-                document.write(`valor do frete por peça: R$${freteRegiao.toFixed(2)}`)
-            }
-            else if (regiao == 'sudeste') {
-                let frete1 = 1000 * 1.2
-                let frete2 = pecas - 1000
-                let frete3 = frete2 * 100/12
-                freteRegiao = frete1 + frete3
-                document.write(`valor do frete por peça: R$${freteRegiao.toFixed(2)}`)
-            }
-            else if (regiao == 'centro-oeste') {
-                let frete1 = 1000 * 1.3
-                let frete2 = pecas - 1000
-                let frete3 = frete2 * 100/13
-                freteRegiao = frete1 + (frete2 - frete3)
-                document.write(`valor do frete por peça: R$${freteRegiao.toFixed(2)}`)
-            }
-        }
-        
+        let fretePorPeca = 0
+        let desconto = 0
 
-        let freteDistancia = distancia * 5
-        let freteTotal = parseFloat(freteDistancia) + parseFloat(freteRegiao) + parseFloat(taxa)
-        document.write(`valor frete por quilômetro: R$${freteDistancia.toFixed(2)}`)
-        document.write(`valor total do frete: R$${freteTotal.toFixed(2)}`)
+        switch (regiao) {
+            case 1: // Sul
+                fretePorPeca = 1.00
+                desconto = 0.10
+                break
+            case 2: // Sudeste
+                FretePorPeca = 1.20
+                desconto = 0.12
+                break
+            case 3: // Centro-oeste
+                FretePorPeca = 1.30
+                desconto = 0.13
+                break
+        }
+
+        let freteNormal = quantidadePecas <= 1000 ? quantidadePecas * FretePorPeca : 1000 * FretePorPeca
+        let freteMaisMil = 0
+
+        if (quantidadePecas > 1000) {
+            const pecasExcedentes = quantidadePecas - 1000
+            freteMaisMil = pecasExcedentes * (FretePorPeca - (FretePorPeca * desconto))
+        }
+
+        const totalFrete = freteNormal + freteMaisMil
+        const taxaRastreamento = desejaRastreamento ? 200.00 : 0
+        const fretePorKm = distanciaKm
+
+        document.write(`Taxa do rastreamento: ${taxaRastreamento.toFixed(2)}<br>`)
+        document.write(`Valor do frete pelas peças: ${totalFrete.toFixed(2)}<br>`)
+        document.write(`Valor do frete por quilômetro: ${fretePorKm.toFixed(2)}<br>`)
+        document.write(`Total do frete: ${(totalFrete + taxaRastreamento + fretePorKm).toFixed(2)}`)
+
     </script>
 </body>
 
